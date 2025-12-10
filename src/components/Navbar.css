@@ -1,0 +1,121 @@
+.stay-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: linear-gradient(90deg, #1a1a1a 0%, #2d0b00 100%);
+  border-bottom: 2px solid #ff4400;
+  z-index: 1000;
+  font-family: 'Motiva Sans', Arial, sans-serif;
+}
+
+.navbar-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.navbar-logo {
+  height: 44px;
+  transition: transform 0.3s;
+}
+
+.navbar-logo:hover {
+  transform: scale(1.1);
+}
+
+.navbar-title {
+  font-size: 26px;
+  font-weight: 900;
+  background: linear-gradient(90deg, #ff6600, #ff2200);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 3px;
+}
+
+.navbar-menu {
+  display: flex;
+  gap: 50px;
+}
+
+.navbar-link {
+  color: #cccccc;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 8px 0;
+  position: relative;
+  transition: color 0.3s;
+  text-decoration: none;
+}
+
+.navbar-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ff6600, #ff2200);
+  border-radius: 2px;
+  transition: all 0.4s ease;
+  transform: translateX(-50%);
+}
+
+.navbar-link:hover,
+.navbar-link.active {
+  color: white;
+}
+
+.navbar-link:hover::after,
+.navbar-link.active::after {
+  width: 100%;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ff6600;
+  font-weight: 600;
+}
+
+.profile-avatar {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(45deg, #ff3300, #ff7733);
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 0 15px;
+  }
+  
+  .navbar-menu {
+    gap: 25px;
+  }
+  
+  .navbar-title {
+    font-size: 22px;
+  }
+}
