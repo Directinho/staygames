@@ -10,8 +10,11 @@ export default function Navbar() {
     { id: 'biblioteca', label: 'BIBLIOTECA' },
     { id: 'perfil', label: 'PERFIL' },
   ];
-
-  return (
+  function handleClick(id) {
+    setActiveItem(id);
+    setActivePage(id);
+  }
+   return (
     <nav className="stay-navbar">
       <div className="navbar-container">
         <div className="navbar-brand">
@@ -21,15 +24,13 @@ export default function Navbar() {
 
         <div className="navbar-menu">
           {menuItems.map((item) => (
-            <a
+            <button
               key={item.id}
-              href={`#${item.id}`}
               className={`navbar-link ${activeItem === item.id ? 'active' : ''}`}
-              onMouseEnter={() => setActiveItem(item.id)}
-              onClick={() => setActiveItem(item.id)}
+              onClick={() => handleClick(item.id)}
             >
               {item.label}
-            </a>
+            </button>
           ))}
         </div>
 

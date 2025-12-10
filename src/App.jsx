@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import logo from './assets/logo.png'; 
 import Navbar from './components/Navbar';
 import GameList from './components/GameList';
+import Profile from './components/Profile';
 import './App.css';
 
 const loadingTexts = [
@@ -15,12 +16,12 @@ const loadingTexts = [
 function App() {
   const [loading, setLoading] = useState(true);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  
+  // <- ABA ATUAL
+  const [activePage, setActivePage] = useState('loja');
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 6000); 
-
+    const timer = setTimeout(() => setLoading(false), 6000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -39,11 +40,8 @@ function App() {
       <div className="loading-screen">
         <div className="loading-content">
           <img src={logo} alt="StayGames Logo" className="loading-logo" />
-
           <h1 className="site-title">StayGames</h1>
-
           <div className="spinner"></div>
-
           <p className="loading-text">
             ...{loadingTexts[currentTextIndex]}
           </p>
@@ -54,9 +52,12 @@ function App() {
 
   return (
     <div className="app">
-      <Navbar></Navbar>
-<main style={{ paddingTop: '90px' }}> 
-         <GameList />
+      <Navbar setActivePage={setActivePage} />
+
+      <main style={{ paddingTop: '90px' }}>
+        {activePage === 'loja' && <GameList />}
+        {activePage === 'biblioteca' && <h1 style={{ color: 'white' }}>Sua biblioteca fictícia</h1>}
+        {activePage === 'perfil' && <Profile />}
       </main>
     </div>
   );
