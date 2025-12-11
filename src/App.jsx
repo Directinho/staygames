@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import logo from './assets/logo.png'; 
 import Navbar from './components/Navbar';
 import GameList from './components/GameList';
-import Profile from './components/Profile';
+import ProfileModal from './components/ProfileModal';
 import './App.css';
 
 const loadingTexts = [
@@ -17,8 +17,12 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   
-  // <- ABA ATUAL
   const [activePage, setActivePage] = useState('loja');
+  
+  const [username, setUsername] = useState('User');
+  const [avatarUrl, setAvatarUrl] = useState('https://i.imgur.com/ckBhGsw.png');
+  
+  const [showProfileModal, setShowProfileModal] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 6000);
@@ -34,6 +38,11 @@ function App() {
 
     return () => clearInterval(interval);
   }, [loading]);
+
+  const openProfileModal = () => {
+    setShowProfileModal(true);
+    setActivePage('loja');
+  };
 
   if (loading) {
     return (
@@ -52,13 +61,31 @@ function App() {
 
   return (
     <div className="app">
-      <Navbar setActivePage={setActivePage} />
+      <Navbar 
+        setActivePage={setActivePage} 
+        username={username} 
+        avatarUrl={avatarUrl} 
+        onProfileClick={openProfileModal} 
+      />
 
       <main style={{ paddingTop: '90px' }}>
         {activePage === 'loja' && <GameList />}
-        {activePage === 'biblioteca' && <h1 style={{ color: 'white' }}>Sua biblioteca fictícia</h1>}
-        {activePage === 'perfil' && <Profile />}
+        {activePage === 'biblioteca' && (
+          <div style={{ textAlign: 'center', marginTop: '100px', fontSize: '2rem', color: '#666' }}>
+            Sua biblioteca está vazia... por enquanto
+          </div>
+        )}
       </main>
+
+      {showProfileModal && (
+        <ProfileModal 
+          username={username}
+          setUsername={setUsername}
+          avatarUrl={avatarUrl}
+          setAvatarUrl={setAvatarUrl}
+          onClose={() => setShowProfileModal(false)}
+        />
+      )}
     </div>
   );
 }

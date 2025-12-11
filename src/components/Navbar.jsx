@@ -2,7 +2,7 @@ import { useState } from 'react';
 import logo from '../assets/logo.png'; 
 import './Navbar.css';
 
-export default function Navbar() {
+export default function Navbar({ setActivePage, username, avatarUrl, onProfileClick }) {
   const [activeItem, setActiveItem] = useState('loja');
 
   const menuItems = [
@@ -10,11 +10,18 @@ export default function Navbar() {
     { id: 'biblioteca', label: 'BIBLIOTECA' },
     { id: 'perfil', label: 'PERFIL' },
   ];
-  function handleClick(id) {
+
+  function handleMenuClick(id) {
     setActiveItem(id);
-    setActivePage(id);
+
+    if (id === 'perfil') {
+      onProfileClick(); 
+    } else {
+      setActivePage(id); 
+    }
   }
-   return (
+
+  return (
     <nav className="stay-navbar">
       <div className="navbar-container">
         <div className="navbar-brand">
@@ -27,7 +34,7 @@ export default function Navbar() {
             <button
               key={item.id}
               className={`navbar-link ${activeItem === item.id ? 'active' : ''}`}
-              onClick={() => handleClick(item.id)}
+              onClick={() => handleMenuClick(item.id)}
             >
               {item.label}
             </button>
@@ -35,9 +42,9 @@ export default function Navbar() {
         </div>
 
         <div className="navbar-right">
-          <div className="navbar-profile">
-            <div className="profile-avatar"></div>
-            <span>USER</span>
+          <div className="navbar-profile" onClick={onProfileClick}>
+            <img src={avatarUrl} alt="Avatar" className="profile-avatar" />
+            <span>{username}</span>
           </div>
         </div>
       </div>

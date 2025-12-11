@@ -97,14 +97,20 @@
   gap: 10px;
   color: #ff6600;
   font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.navbar-profile:hover {
+  transform: scale(1.05);
 }
 
 .profile-avatar {
   width: 36px;
   height: 36px;
-  background: linear-gradient(45deg, #ff3300, #ff7733);
   border-radius: 50%;
   border: 2px solid #fff;
+  object-fit: cover;
 }
 
 @media (max-width: 768px) {
